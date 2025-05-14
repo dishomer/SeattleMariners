@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seattle Mariners Top Batter Prospects (2025)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-dt/css/jquery.dataTables.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      color: #005c5c;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+    th {
+      background-color: #007b7f;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    a {
+      color: #007b7f;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Seattle Mariners Top Batter Prospects (2025)</h1>
+  <table id="prospects">
+    <thead>
+      <tr>
+        <th>Name</th><th>Position</th>
+        <th>MLB ETA</th>
+        <th>Player Comp</th>
+        <th>Hit</th>
+        <th>Power</th>
+        <th>Run</th>
+        <th>Arm</th>
+        <th>Field</th>
+        <th>Overall</th>
+        <th>2025 Stats</th>
+        <th>Summary</th>
+      </tr>
+    </thead>
+    <tbody id="prospects-body"></tbody>
+  </table>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script>
+    const data = [
+      // Each player now includes position field
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=montes000laz" target="_blank">Lazaro Montes</a>',
+        eta: '2026',
+        comp: '<a href="https://www.baseball-reference.com/players/a/alvaryo01.shtml" target="_blank">Yordan Álvarez</a>',
+        hit: 50, power: 60, run: 30, arm: 55, field: 45, overall: 50,
+        stats: '.285/.387/.565, HR: 30, SB: 3, wRC+: 152',
+        position: 'OF', summary: 'Explosive power hitter with middle-of-the-order upside. Needs to refine strike zone control and improve defense.'
+      },
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=emerso001col" target="_blank">Colt Emerson</a>',
+        eta: '2026',
+        comp: '<a href="https://www.baseball-reference.com/players/l/lowebr01.shtml" target="_blank">Brandon Lowe</a>',
+        hit: 60, power: 50, run: 50, arm: 55, field: 55, overall: 55,
+        stats: '.302/.390/.468, HR: 9, SB: 10, wRC+: 138',
+        position: 'SS/2B', summary: 'Polished lefty bat with good instincts. Projects as a solid all-around middle infielder.'
+      },
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=young-006col" target="_blank">Cole Young</a>',
+        eta: '2025',
+        comp: '<a href="https://www.baseball-reference.com/players/m/madrini01.shtml" target="_blank">Nick Madrigal</a> + power',
+        hit: 60, power: 45, run: 55, arm: 55, field: 55, overall: 55,
+        stats: '.289/.384/.442, HR: 12, SB: 18, wRC+: 125',
+        position: 'SS', summary: 'Steady contact hitter with advanced feel for the game. High-floor shortstop candidate.'
+      },
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=ford--003har" target="_blank">Harry Ford</a>',
+        eta: '2025',
+        comp: '<a href="https://www.baseball-reference.com/players/v/varshda01.shtml" target="_blank">Dalton Varsho</a>',
+        hit: 50, power: 50, run: 60, arm: 55, field: 50, overall: 50,
+        stats: '.251/.384/.410, HR: 14, SB: 21, wRC+: 115',
+        position: 'C', summary: 'Unique speed and athleticism for a catcher. Could shift to the outfield to unlock his versatility.'
+      },
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=celest000fel" target="_blank">Felnin Celesten</a>',
+        eta: '2027',
+        comp: '<a href="https://www.baseball-reference.com/players/c/correca01.shtml" target="_blank">Carlos Correa</a>',
+        hit: 55, power: 55, run: 60, arm: 60, field: 55, overall: 55,
+        stats: '.284/.369/.426, HR: 4, SB: 7, wRC+: 123',
+        position: 'SS', summary: 'Elite tools with star-level shortstop ceiling. Young but already impressing with skill and poise.'
+      },
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=arroyo001mic" target="_blank">Michael Arroyo</a>',
+        eta: '2026',
+        comp: '<a href="https://www.baseball-reference.com/players/r/rengilu01.shtml" target="_blank">Luis Rengifo</a>',
+        hit: 55, power: 50, run: 45, arm: 50, field: 50, overall: 50,
+        stats: '.275/.365/.430, HR: 8, SB: 5, wRC+: 118',
+        position: 'IF', summary: 'Mature approach at the plate with infield versatility. Projects as a utility infielder with contact skills.'
+      },
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=farmel000jon" target="_blank">Jonny Farmelo</a>',
+        eta: '2026',
+        comp: '<a href="https://www.baseball-reference.com/players/b/brantmi02.shtml" target="_blank">Michael Brantley</a> + speed',
+        hit: 55, power: 50, run: 60, arm: 55, field: 55, overall: 50,
+        stats: '.268/.371/.415, HR: 6, SB: 15, wRC+: 120',
+        position: 'OF', summary: 'Solid outfield defender with speed. If power grows, could be a high-upside center fielder.'
+      },
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=peete-000tai" target="_blank">Tai Peete</a>',
+        eta: '2027',
+        comp: '<a href="https://www.baseball-reference.com/players/b/buxtoby01.shtml" target="_blank">Byron Buxton</a> (healthy)',
+        hit: 50, power: 55, run: 60, arm: 55, field: 50, overall: 50,
+        stats: '.260/.340/.420, HR: 5, SB: 12, wRC+: 110',
+        position: 'SS/OF', summary: 'High-risk, high-reward prospect with raw tools. Needs refinement at the plate to unlock full potential.'
+      },
+      
+      {
+        name: '<a href="https://www.baseball-reference.com/register/player.fcgi?id=lockle000tyl" target="_blank">Tyler Locklear</a>',
+        eta: '2025',
+        comp: '<a href="https://www.baseball-reference.com/players/w/walkech03.shtml" target="_blank">Christian Walker</a>',
+        hit: 50, power: 60, run: 30, arm: 50, field: 45, overall: 50,
+        stats: '.281/.375/.498, HR: 22, SB: 2, wRC+: 132',
+        position: '1B/3B', summary: 'Corner bat with real power and a patient approach. Limited defensively but could stick as a DH/1B.'
+      }
+    ];
+
+    function populateTable() {
+      const tbody = document.getElementById('prospects-body');
+      data.forEach(player => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${player.name}</td>
+          <td>${player.position}</td>
+          <td>${player.eta}</td>
+          <td>${player.comp}</td>
+          <td>${player.hit}</td>
+          <td>${player.power}</td>
+          <td>${player.run}</td>
+          <td>${player.arm}</td>
+          <td>${player.field}</td>
+          <td>${player.overall}</td>
+          <td>${player.stats}</td>
+          <td>${player.summary}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      populateTable();
+      $('#prospects').DataTable();
+    });
+  </script>
+</body>
+</html>
